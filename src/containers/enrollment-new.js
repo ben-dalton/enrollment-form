@@ -6,12 +6,18 @@ import validate from './validate-enrollment-form';
 
 export const fields = [
 	'name',
-	'shipping.street',
-	'shipping.city',
-	'shipping.phones[]',
-	'billing.street',
-	'billing.city',
-	'billing.phones[]',
+	'physical.street1',
+	'physical.street2',
+	'physical.city',
+	'physical.state',
+	'physical.zip',
+	'physical.phones[]',
+	'mailing.street1',
+	'mailing.street2',
+	'mailing.city',
+	'mailing.state',
+	'mailing.zip',
+	'mailing.phones[]',
 	'farm[].name',
 	'farm[].street',
 	'farm[].city'
@@ -21,7 +27,7 @@ class EnrollmentForm extends Component {
 	render() {
 		const {
 			addValue,
-			fields: { name, shipping, billing, children },
+			fields: { name, physical, mailing, children },
 			handleSubmit,
 			resetForm,
 			invalid,
@@ -29,24 +35,21 @@ class EnrollmentForm extends Component {
 		} = this.props;
 		return (
 			<form onSubmit={handleSubmit}>
-				<div>
+				<div className="form-group">
 					<label>Name</label>
 					<div>
-						<PureInput type="text" placeholder="Name" field={name} title={name.error} />
+						<PureInput className="form-control" type="text" placeholder="Name" field={name} title={name.error} />
 					</div>
 				</div>
-				<div>
-					<fieldset>
-						<legend>Shipping</legend>
-						<Address {...shipping}/>
-					</fieldset>
-				</div>
-				<div>
-					<fieldset>
-						<legend>Billing</legend>
-						<Address {...billing} />
-					</fieldset>
-				</div>
+				<fieldset>
+					<legend>Physical Address</legend>
+					<Address {...physical}/>
+				</fieldset>
+				<hr />
+				<fieldset>
+					<legend>Mailing Address</legend>
+					<Address {...mailing} />
+				</fieldset>
 			</form>
 		)
 	}

@@ -6,15 +6,15 @@ const requireFields = (...names) => data =>
 		return errors;
 	}, {});
 
-const validateAddress = requireFields('street', 'city');
+const validateAddress = requireFields('street1', 'city', 'zip');
 const validateFarm = requireFields('name', 'street', 'city');
 const validateEnrollmentForm = data => {
 	const errors = {};
 	if (!data.name) {
 		errors.name = 'Required';
 	}
-	errors.shipping = validateAddress(data.shipping)
-	errors.billing = validateAddress(data.billing)
+	errors.mailing = validateAddress(data.mailing)
+	errors.physical = validateAddress(data.physical)
 	errors.farm = data.farm.map(validateFarm)
 	return errors
 }
